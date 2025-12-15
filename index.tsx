@@ -14,18 +14,25 @@ import {
   MessageCircle,
   MapPin,
   Clock,
-  ShieldCheck,
+  FileCheck,
   User,
   ChevronLeft,
   ChevronRight,
-  Map
+  Map,
+  Star,
+  ChevronDown,
+  ChevronUp,
+  Truck,
+  ShieldCheck,
+  FileText,
+  HelpCircle
 } from "lucide-react";
 
 // --- Components ---
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "secondary" | "outline" | "google";
   className?: string;
   onClick?: () => void;
   href?: string;
@@ -36,7 +43,8 @@ const Button = ({ children, variant = "primary", className = "", onClick, href }
   const variants = {
     primary: "bg-sky-600 hover:bg-sky-700 text-white shadow-sky-200",
     secondary: "bg-slate-800 hover:bg-slate-900 text-white",
-    outline: "border-2 border-sky-600 text-sky-600 hover:bg-sky-50"
+    outline: "border-2 border-sky-600 text-sky-600 hover:bg-sky-50",
+    google: "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50"
   };
 
   if (href) {
@@ -99,8 +107,9 @@ const Header = () => {
   const navLinks = [
     { name: "Início", href: "#home" },
     { name: "Serviços", href: "#services" },
-    { name: "A Conecta", href: "#about" },
+    { name: "Estrutura", href: "#structure" },
     { name: "O Técnico", href: "#technician" },
+    { name: "FAQ", href: "#faq" },
   ];
 
   return (
@@ -221,11 +230,11 @@ const Hero = () => (
           {/* Floating Badge */}
           <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-xl border border-slate-100 flex items-center gap-3">
              <div className="bg-green-100 p-2 rounded-full">
-               <ShieldCheck className="w-6 h-6 text-green-600" />
+               <FileCheck className="w-6 h-6 text-green-600" />
              </div>
              <div>
-               <p className="text-xs text-slate-500 uppercase font-bold">Confiança</p>
-               <p className="font-bold text-slate-900">100% Seguro</p>
+               <p className="text-xs text-slate-500 uppercase font-bold">Emitimos</p>
+               <p className="font-bold text-slate-900">Nota Fiscal</p>
              </div>
           </div>
         </div>
@@ -233,6 +242,24 @@ const Hero = () => (
     </div>
   </section>
 );
+
+const Brands = () => {
+  const brands = ["Apple", "Samsung", "Xiaomi", "Motorola", "Oppo"];
+  return (
+    <section className="py-10 bg-slate-50 border-y border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 text-center">
+        <p className="text-slate-500 font-semibold uppercase tracking-wider text-sm mb-6">Trabalhamos com as principais marcas</p>
+        <div className="flex flex-wrap justify-center gap-6 md:gap-12 items-center opacity-70 hover:opacity-100 transition-opacity">
+           {brands.map((brand) => (
+             <div key={brand} className="bg-white px-6 py-3 rounded-full shadow-sm border border-slate-200 font-bold text-slate-700 text-lg md:text-xl">
+               {brand}
+             </div>
+           ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -344,46 +371,83 @@ const Services = () => {
   );
 };
 
-const AboutBusiness = () => (
-  <section id="about" className="py-20 bg-slate-900 text-white relative overflow-hidden">
+const GoogleReviewsAndStats = () => (
+  <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
     <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(#38bdf8 1px, transparent 1px)", backgroundSize: "30px 30px" }}></div>
     
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div>
-          <SectionTitle 
-            subtitle="Nossa História" 
-            title="De plataforma a laboratório especializado" 
-            centered={false} 
-          />
-          <div className="space-y-6 text-slate-300 text-lg leading-relaxed">
-            <p>
-              A <strong>Conecta Assistech</strong> nasceu com um grande sonho: conectar clientes aos melhores profissionais. Com o tempo, percebemos que a melhor forma de garantir a qualidade que prezamos era assumir a responsabilidade técnica diretamente.
-            </p>
-            <p>
-              Hoje, somos uma assistência técnica dedicada, focada exclusivamente em oferecer o melhor reparo para seu celular, notebook ou computador. Pivotamos nosso modelo de negócio para garantir que cada parafuso apertado e cada peça trocada tenha o nosso selo de excelência.
-            </p>
-            <p>
-              Nosso compromisso é com a transparência: você sabe exatamente o que está sendo feito no seu aparelho, quanto vai custar e porquê. Sem surpresas.
-            </p>
-          </div>
-          <div className="mt-8 grid grid-cols-2 gap-6">
-            <div className="bg-slate-800 p-4 rounded-lg">
-              <p className="text-3xl font-bold text-sky-500 mb-1">+30</p>
-              <p className="text-sm text-slate-400">Serviços Realizados</p>
+      <div className="text-center mb-12">
+         <h2 className="text-3xl font-bold mb-6">O que dizem nossos clientes</h2>
+         <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl max-w-2xl mx-auto border border-slate-700">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <span className="text-4xl font-bold text-white">4.9</span>
+              <div className="flex text-yellow-400">
+                <Star fill="currentColor" />
+                <Star fill="currentColor" />
+                <Star fill="currentColor" />
+                <Star fill="currentColor" />
+                <Star fill="currentColor" />
+              </div>
             </div>
-            <div className="bg-slate-800 p-4 rounded-lg">
-              <p className="text-3xl font-bold text-sky-500 mb-1">96%</p>
-              <p className="text-sm text-slate-400">Clientes Satisfeitos</p>
-            </div>
-          </div>
+            <p className="text-slate-300 mb-6">Veja as avaliações reais de quem já confiou na Conecta Assistech.</p>
+            <Button variant="google" href="https://share.google/x7W0bPc8FScELQo4G">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" className="w-5 h-5 mr-3" alt="Google" />
+              Ver avaliações no Google
+            </Button>
+         </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col items-center justify-center text-center">
+          <p className="text-4xl font-bold text-sky-500 mb-2">+30</p>
+          <p className="text-slate-400 font-medium">Serviços Realizados</p>
         </div>
-        <div className="relative">
-           <img 
-            src="https://images.unsplash.com/photo-1581092921461-eab62e97a782?auto=format&fit=crop&q=80&w=800" 
-            alt="Bancada de eletrônica" 
-            className="rounded-lg shadow-2xl border border-slate-700"
-          />
+        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col items-center justify-center text-center">
+          <p className="text-4xl font-bold text-sky-500 mb-2">96%</p>
+          <p className="text-slate-400 font-medium">Clientes Satisfeitos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const LabStructure = () => (
+  <section id="structure" className="py-20 bg-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+        <SectionTitle subtitle="Transparência e Qualidade" title="Nossa Estrutura" centered={false} />
+        
+        {/* Location Menu */}
+        <div className="flex items-center gap-4 bg-sky-50 px-5 py-3 rounded-xl shadow-sm border border-sky-100 mb-8">
+          <img src="image_0.png" alt="Logo Pequeno" className="w-10 h-10 object-contain" />
+          <div className="text-sm text-slate-700 border-r border-slate-300 pr-4 mr-2">
+            <p className="font-bold text-slate-900">Conecta Assistech</p>
+            <p>Laboratório Especializado</p>
+          </div>
+          <a 
+            href="https://share.google/x7W0bPc8FScELQo4G" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sky-600 hover:text-sky-700 font-bold text-sm bg-white px-3 py-1.5 rounded-lg shadow-sm"
+          >
+            <MapPin size={16} />
+            Ver no Mapa
+          </a>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="group overflow-hidden rounded-xl shadow-md h-48">
+          <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Bancada de reparo" />
+        </div>
+        <div className="group overflow-hidden rounded-xl shadow-md h-48">
+          <img src="https://images.unsplash.com/photo-1555617981-d70c4061a995?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Equipamentos de precisão" />
+        </div>
+        <div className="group overflow-hidden rounded-xl shadow-md h-48">
+          <img src="https://images.unsplash.com/photo-1517430816045-df4b7de8db2b?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Ferramentas técnicas" />
+        </div>
+        <div className="group overflow-hidden rounded-xl shadow-md h-48">
+          <img src="https://images.unsplash.com/photo-1588702547923-7093a6c3f067?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Organização de peças" />
         </div>
       </div>
     </div>
@@ -395,16 +459,16 @@ const AboutTechnician = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionTitle subtitle="Quem cuida do seu aparelho" title="Sobre o Especialista" />
       
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
         <div className="grid md:grid-cols-12 gap-0">
-          {/* Tech Photo Column - Using mascot as per request/files */}
+          {/* Tech Photo Column */}
           <div className="md:col-span-5 relative h-80 md:h-auto bg-slate-900 flex items-center justify-center p-8">
             <img 
               src="image_0.png" 
               alt="Mascote Claudir" 
               className="w-48 h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform"
             />
-            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-900 to-transparent p-6">
+            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent p-6">
               <h3 className="text-2xl font-bold text-white">Claudir</h3>
               <p className="text-sky-300 font-medium">Técnico & Fundador</p>
             </div>
@@ -419,69 +483,113 @@ const AboutTechnician = () => (
             <p className="text-slate-600 mb-4 leading-relaxed">
               Olá! Sou o Claudir. Minha missão é devolver a vida útil ao seu equipamento com qualidade e honestidade. Não sou apenas um trocador de peças; sou um técnico apaixonado por diagnósticos precisos.
             </p>
-            <p className="text-slate-600 mb-6 leading-relaxed">
+            <p className="text-slate-600 mb-8 leading-relaxed">
               Com formação especializada e bancada equipada, garanto que seu dispositivo receba o tratamento profissional que merece.
             </p>
             
-            <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
-              <h4 className="font-bold text-slate-900 mb-4 text-sm uppercase tracking-wide">Formações & Especialidades</h4>
-              <ul className="grid sm:grid-cols-2 gap-3 text-sm text-slate-700">
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-sky-500" />
-                  Técnico em Eletrônica
+            <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-inner">
+              <h4 className="font-bold text-slate-900 mb-4 text-sm uppercase tracking-wide flex items-center gap-2">
+                <FileText size={16} className="text-sky-600"/> 
+                Formações & Especialidades
+              </h4>
+              <ul className="space-y-3 text-sm text-slate-700">
+                <li className="flex items-center gap-3">
+                  <div className="bg-green-100 p-1 rounded-full"><CheckCircle className="w-4 h-4 text-green-600" /></div>
+                  <span className="font-medium">Técnico em Informática - <span className="text-slate-500">Senac</span></span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-sky-500" />
-                  Técnico em Informática
+                <li className="flex items-center gap-3">
+                  <div className="bg-green-100 p-1 rounded-full"><CheckCircle className="w-4 h-4 text-green-600" /></div>
+                  <span className="font-medium">Técnico em Eletrônica - <span className="text-slate-500">Etec</span></span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-sky-500" />
-                  Reparo Avançado de Placas
+                <li className="flex items-center gap-3">
+                  <div className="bg-green-100 p-1 rounded-full"><CheckCircle className="w-4 h-4 text-green-600" /></div>
+                  <span className="font-medium">Suporte em TI - <span className="text-slate-500">Instituto da Oportunidade Social</span></span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-sky-500" />
-                  Microsoldagem
+                <li className="flex items-center gap-3">
+                  <div className="bg-green-100 p-1 rounded-full"><CheckCircle className="w-4 h-4 text-green-600" /></div>
+                  <span className="font-medium">Negócio Destaque - <span className="text-slate-500">Empreende Aí</span></span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Lab Gallery & Structure */}
-      <div className="mt-12">
-        <div className="flex items-center flex-col md:flex-row justify-between items-end mb-6 gap-4">
-          <h4 className="text-xl font-bold text-slate-900">Nossa Estrutura</h4>
-          
-          {/* Location Menu */}
-          <div className="flex items-center gap-4 bg-white px-4 py-2 rounded-lg shadow-sm border border-slate-200">
-            <img src="image_0.png" alt="Logo Pequeno" className="w-8 h-8" />
-            <div className="text-xs text-slate-600 border-r border-slate-200 pr-4 mr-1">
-              <p className="font-bold">Venha nos visitar</p>
-              <p>Laboratório Profissional</p>
-            </div>
-            <a 
-              href="https://share.google/HZNtHkdanpPtwzJBA" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sky-600 hover:text-sky-700 font-semibold text-sm"
-            >
-              <MapPin size={16} />
-              Ver no Mapa
-            </a>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&q=80&w=400" className="rounded-lg h-40 w-full object-cover shadow-md hover:scale-105 transition-transform" alt="Bancada 1" />
-          <img src="https://images.unsplash.com/photo-1555617981-d70c4061a995?auto=format&fit=crop&q=80&w=400" className="rounded-lg h-40 w-full object-cover shadow-md hover:scale-105 transition-transform" alt="Bancada 2" />
-          <img src="https://images.unsplash.com/photo-1517430816045-df4b7de8db2b?auto=format&fit=crop&q=80&w=400" className="rounded-lg h-40 w-full object-cover shadow-md hover:scale-105 transition-transform" alt="Ferramentas" />
-          <img src="https://images.unsplash.com/photo-1588702547923-7093a6c3f067?auto=format&fit=crop&q=80&w=400" className="rounded-lg h-40 w-full object-cover shadow-md hover:scale-105 transition-transform" alt="Peças" />
-        </div>
-      </div>
     </div>
   </section>
 );
+
+const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-slate-200">
+      <button 
+        className="w-full flex justify-between items-center py-4 text-left font-semibold text-slate-900 hover:text-sky-600 focus:outline-none"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span>{question}</span>
+        {isOpen ? <ChevronUp className="text-sky-600" /> : <ChevronDown className="text-slate-400" />}
+      </button>
+      {isOpen && (
+        <div className="pb-4 text-slate-600 text-sm leading-relaxed animate-in slide-in-from-top-2 duration-200">
+          {answer}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const FAQ = () => {
+  const faqs = [
+    {
+      question: "Como funciona a garantia?",
+      answer: "A garantia legal é de 90 dias e cobre exclusivamente o serviço realizado. Qualquer outro defeito posterior não relacionado ao reparo, ou defeitos pré-existentes consentidos na triagem, não são cobertos."
+    },
+    {
+      question: "Como faço para entregar meu celular?",
+      answer: "Operamos em ponto residencial sem loja física aberta ao público geral. É necessário agendamento para entrega. Em bairros próximos (até 1.5km), oferecemos retirada gratuita."
+    },
+    {
+      question: "Quanto tempo leva para consertar?",
+      answer: "O prazo varia conforme a complexidade do defeito e disponibilidade de peças. Após o diagnóstico inicial, informamos o prazo estimado junto com o orçamento."
+    },
+    {
+      question: "Emite nota fiscal?",
+      answer: "Sim! Emitimos Nota Fiscal de Serviço para todos os reparos realizados, enviada em até 30 dias após a conclusão do serviço."
+    },
+    {
+      question: "Como posso confiar no trabalho da Conecta?",
+      answer: "Prezamos pela transparência total. Gravamos vídeos do estado do aparelho na entrada e na saída, utilizamos ordem de serviço digital e realizamos um checklist completo testando todas as funções."
+    },
+    {
+      question: "Quais são os procedimentos da Conecta?",
+      answer: "Nosso fluxo é: 1. Triagem e recebimento; 2. Diagnóstico técnico; 3. Envio de Orçamento; 4. Aprovação do cliente; 5. Execução do Reparo; 6. Testes finais e Checklist; 7. Entrega."
+    },
+    {
+      question: "Realizam entregas?",
+      answer: "Sim. Até 1.5km a entrega/retirada é grátis. Até 5km (próximo a estações de metrô/trem) cobramos taxa fixa de R$10. Acima de 5km utilizamos apps de entrega como Uber Flash ou 99 Entregas."
+    }
+  ];
+
+  return (
+    <section id="faq" className="py-20 bg-white">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <span className="inline-flex items-center justify-center p-3 bg-sky-100 rounded-full text-sky-600 mb-4">
+            <HelpCircle size={24} />
+          </span>
+          <h2 className="text-3xl font-bold text-slate-900">Perguntas Frequentes</h2>
+          <p className="text-slate-500 mt-2">Tire suas dúvidas sobre nossos serviços</p>
+        </div>
+        
+        <div className="bg-slate-50 rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-100">
+          {faqs.map((faq, index) => (
+            <FAQItem key={index} {...faq} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Footer = () => (
   <footer id="contact" className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
@@ -510,7 +618,7 @@ const Footer = () => (
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
               <MapPin className="text-sky-500 shrink-0 mt-1" size={20} />
-              <span>Rua Exemplo, 123 - Centro<br/>Cidade - Estado, CEP 00000-000</span>
+              <span>Ponto de Coleta Residencial<br/>Agende sua visita</span>
             </li>
             <li className="flex items-center gap-3">
               <MessageCircle className="text-sky-500 shrink-0" size={20} />
@@ -528,8 +636,9 @@ const Footer = () => (
           <ul className="space-y-2">
             <li><a href="#home" className="hover:text-sky-500 transition-colors">Início</a></li>
             <li><a href="#services" className="hover:text-sky-500 transition-colors">Serviços</a></li>
-            <li><a href="#about" className="hover:text-sky-500 transition-colors">Sobre a Conecta</a></li>
+            <li><a href="#structure" className="hover:text-sky-500 transition-colors">Estrutura</a></li>
             <li><a href="#technician" className="hover:text-sky-500 transition-colors">Sobre o Técnico</a></li>
+            <li><a href="#faq" className="hover:text-sky-500 transition-colors">Dúvidas Frequentes</a></li>
             <li className="pt-4 mt-4 border-t border-slate-800">
                <a href="#" className="flex items-center gap-2 text-sky-500 hover:text-sky-400 font-semibold text-sm">
                  <User size={14} />
@@ -554,8 +663,11 @@ const App = () => {
       <main>
         <Hero />
         <Services />
-        <AboutBusiness />
+        <Brands />
+        <GoogleReviewsAndStats />
+        <LabStructure />
         <AboutTechnician />
+        <FAQ />
       </main>
       <Footer />
       
