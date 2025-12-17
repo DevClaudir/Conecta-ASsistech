@@ -10,6 +10,16 @@
     <style>
       body { font-family: 'Inter', sans-serif; }
       html { scroll-behavior: smooth; }
+      
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-marquee {
+        animation: marquee 40s linear infinite;
+        width: fit-content;
+      }
+      /* Removed pause on hover rule to keep carousel moving */
     </style>
   <script type="importmap">
 {
