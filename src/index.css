@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* Garante que o scroll suave funcione para os links do menu */
+html {
+  scroll-behavior: smooth;
+}
